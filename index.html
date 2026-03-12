@@ -54,11 +54,7 @@
     z-index: 100;
   }
 
-  .topbar-left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
 
   .logo-icon {
     width: 38px; height: 38px;
@@ -89,11 +85,7 @@
     text-transform: uppercase;
   }
 
-  .topbar-center {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
+  .topbar-center { display: flex; gap: 12px; align-items: center; }
 
   .status-pill {
     display: flex; align-items: center; gap: 6px;
@@ -116,14 +108,9 @@
     animation: pulse 2s infinite;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-  .topbar-right {
-    text-align: right;
-  }
+  .topbar-right { text-align: right; }
 
   #clock {
     font-family: 'Share Tech Mono', monospace;
@@ -147,11 +134,11 @@
   /* MAIN LAYOUT */
   .main {
     display: grid;
-    grid-template-columns: 210px 1fr 280px;
-    grid-template-rows: auto auto;
+    grid-template-columns: 210px 1fr 290px;
     gap: 10px;
     padding: 10px;
     min-height: calc(100vh - 58px);
+    align-items: start;
   }
 
   /* PANELS */
@@ -189,13 +176,11 @@
   /* SIDEBAR */
   .sidebar {
     grid-column: 1;
-    grid-row: 1 / 3;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  /* QUICK LAUNCH */
   .quick-launch { flex-shrink: 0; }
 
   .launcher-item {
@@ -254,7 +239,7 @@
   }
 
   /* NOTES */
-  .notes-panel { flex: 1; }
+  .notes-panel { }
   .notes-panel textarea {
     width: 100%;
     background: transparent;
@@ -266,23 +251,20 @@
     line-height: 1.7;
     padding: 12px 14px;
     resize: none;
-    height: calc(100% - 37px);
-    min-height: 120px;
+    height: 180px;
   }
   .notes-panel textarea::placeholder { color: var(--text-muted); }
 
   /* CENTER COLUMN */
   .center-col {
     grid-column: 2;
-    grid-row: 1 / 3;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  /* WEATHER + ANIME SPLIT PANEL */
+  /* WEATHER PANEL — dual city */
   .weather-panel {
-    min-height: 270px;
     position: relative;
     overflow: hidden;
     background: #111;
@@ -292,23 +274,46 @@
   .weather-anime-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    height: 100%;
-    min-height: 270px;
     padding-top: 37px;
   }
 
-  /* LEFT: WEATHER */
   .weather-half {
-    background: linear-gradient(180deg, #1a1e24 0%, #0e1218 100%);
-    border-right: 1px solid var(--border);
     overflow: hidden;
   }
 
-  .weather-content {
-    padding: 12px 14px;
+  /* Dual weather within left half */
+  .dual-weather {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+  }
+
+  .city-weather-block {
+    background: linear-gradient(180deg, #1a1e24 0%, #0e1218 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 12px;
+  }
+
+  .city-weather-block:last-child { border-bottom: none; }
+
+  .city-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .city-label::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    box-shadow: 0 0 6px rgba(200,146,42,0.6);
   }
 
   .weather-main {
@@ -319,89 +324,56 @@
 
   .weather-temp {
     font-family: 'Oswald', sans-serif;
-    font-size: 50px;
+    font-size: 38px;
     font-weight: 300;
     color: var(--accent-amber);
-    text-shadow: 0 0 24px rgba(232,160,48,0.4);
+    text-shadow: 0 0 20px rgba(232,160,48,0.4);
     line-height: 1;
   }
 
-  .weather-temp sup {
-    font-size: 18px;
-    vertical-align: super;
-    opacity: 0.7;
-  }
+  .weather-temp sup { font-size: 14px; vertical-align: super; opacity: 0.7; }
 
-  .weather-right { text-align: right; }
-
-  .weather-icon-big {
-    font-size: 38px;
-    line-height: 1;
-    filter: drop-shadow(0 0 10px rgba(232,160,48,0.3));
-  }
+  .weather-icon-big { font-size: 30px; line-height: 1; }
 
   .weather-desc {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     color: var(--text-primary);
     text-transform: uppercase;
     margin-top: 2px;
   }
 
-  .weather-location {
+  .weather-sub-details {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+  }
+
+  .wsd {
     font-family: 'Share Tech Mono', monospace;
     font-size: 9px;
-    color: var(--text-dim);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-top: 1px;
-  }
-
-  .weather-details {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .weather-detail {
-    background: var(--bg-card2);
-    padding: 6px 8px;
-    text-align: center;
-  }
-
-  .weather-detail-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 7px;
-    letter-spacing: 1.5px;
     color: var(--text-muted);
-    text-transform: uppercase;
-    margin-bottom: 2px;
   }
 
-  .weather-detail-value {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
+  .wsd span {
     color: var(--accent-amber);
+    font-weight: bold;
   }
 
   .weather-forecast {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 4px;
+    gap: 3px;
+    margin-top: 6px;
   }
 
   .forecast-day {
     background: var(--bg-card2);
     border: 1px solid var(--border);
     border-radius: 3px;
-    padding: 5px 3px;
+    padding: 4px 2px;
     text-align: center;
   }
 
@@ -413,11 +385,11 @@
     text-transform: uppercase;
   }
 
-  .forecast-icon { font-size: 14px; margin: 2px 0; }
+  .forecast-icon { font-size: 12px; margin: 2px 0; }
 
   .forecast-temp {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 600;
     color: var(--text-primary);
   }
@@ -427,16 +399,16 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 200px;
-    gap: 10px;
+    height: 80px;
+    gap: 8px;
     color: var(--text-muted);
     font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
+    font-size: 9px;
     letter-spacing: 2px;
   }
 
   .loading-spinner {
-    width: 28px; height: 28px;
+    width: 20px; height: 20px;
     border: 2px solid var(--border);
     border-top-color: var(--accent-gold);
     border-radius: 50%;
@@ -445,7 +417,7 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* RIGHT: ANIME PANEL */
+  /* ANIME HALF */
   .anime-half {
     position: relative;
     overflow: hidden;
@@ -453,9 +425,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 300px;
   }
 
-  /* Canvas for anime scene */
   #animeCanvas {
     position: absolute;
     inset: 0;
@@ -501,11 +473,7 @@
     margin-top: 2px;
   }
 
-  .anime-dots {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-  }
+  .anime-dots { display: flex; gap: 4px; align-items: center; }
 
   .anime-dot {
     width: 6px; height: 6px;
@@ -521,20 +489,16 @@
     border-radius: 3px;
   }
 
-  /* TODO LIST */
+  /* TO DO */
+  .todo-panel { }
 
-  /* TODO LIST */
-  .todo-panel { flex: 1; }
-
-  .todo-list {
-    padding: 8px 0;
-  }
+  .todo-list { padding: 4px 0; max-height: 280px; overflow-y: auto; }
 
   .todo-item {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 14px;
+    padding: 9px 14px;
     border-bottom: 1px solid var(--border);
     transition: background 0.15s;
     cursor: pointer;
@@ -564,13 +528,7 @@
     box-shadow: 0 0 8px rgba(76,175,114,0.4);
   }
 
-  .todo-check-inner {
-    color: #fff;
-    font-size: 10px;
-    font-weight: bold;
-    display: none;
-  }
-
+  .todo-check-inner { color: #fff; font-size: 10px; font-weight: bold; display: none; }
   .todo-item.done .todo-check-inner { display: block; }
 
   .todo-text {
@@ -594,11 +552,7 @@
   .tag-active { background: rgba(76,175,114,0.2); color: var(--accent-green); border: 1px solid rgba(76,175,114,0.3); }
   .tag-pending { background: rgba(74,143,196,0.2); color: var(--accent-blue); border: 1px solid rgba(74,143,196,0.3); }
 
-  .todo-add {
-    display: flex;
-    gap: 0;
-    border-top: 1px solid var(--border);
-  }
+  .todo-add { display: flex; border-top: 1px solid var(--border); }
 
   .todo-add input {
     flex: 1;
@@ -630,36 +584,66 @@
 
   .todo-add-btn:hover { background: var(--accent-amber); }
 
+  .todo-sync-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px;
+    border-top: 1px solid var(--border);
+    background: rgba(0,0,0,0.2);
+  }
+
+  .sync-status {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    flex: 1;
+  }
+
+  .sync-status.synced { color: var(--accent-green); }
+  .sync-status.syncing { color: var(--accent-amber); }
+  .sync-status.error { color: var(--accent-red); }
+
+  .sync-btn {
+    background: transparent;
+    border: 1px solid var(--border-bright);
+    color: var(--text-dim);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    padding: 3px 8px;
+    cursor: pointer;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    transition: all 0.15s;
+  }
+
+  .sync-btn:hover { border-color: var(--accent-gold); color: var(--accent-amber); }
+
   /* RIGHT COLUMN */
   .right-col {
     grid-column: 3;
-    grid-row: 1 / 3;
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  /* BIBLE VERSES */
-  .bible-panel {
-    background: linear-gradient(160deg, #1a1e14 0%, #121410 100%);
-  }
+  /* BIBLE */
+  .bible-panel { background: linear-gradient(160deg, #1a1e14 0%, #121410 100%); }
 
   .verse-display {
-    padding: 16px;
+    padding: 14px;
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
-  .verse-icon {
-    font-size: 28px;
-    opacity: 0.8;
-  }
+  .verse-icon { font-size: 24px; opacity: 0.8; }
 
   .verse-text {
     font-family: 'Exo 2', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 300;
     line-height: 1.7;
     color: var(--text-primary);
@@ -679,12 +663,7 @@
     text-align: right;
   }
 
-  .verse-nav {
-    display: flex;
-    gap: 6px;
-    justify-content: center;
-    margin-top: 4px;
-  }
+  .verse-nav { display: flex; gap: 6px; justify-content: center; }
 
   .verse-btn {
     background: var(--bg-card2);
@@ -700,73 +679,80 @@
     text-transform: uppercase;
   }
 
-  .verse-btn:hover {
-    border-color: var(--accent-gold);
-    color: var(--accent-amber);
-  }
+  .verse-btn:hover { border-color: var(--accent-gold); color: var(--accent-amber); }
 
-  /* TODAY'S TASKS */
-  .tasks-panel { flex-shrink: 0; }
+  /* NEWS PANELS */
+  .news-panel { }
 
-  .task-list { padding: 4px 0; }
+  .news-list { padding: 4px 0; max-height: 220px; overflow-y: auto; }
 
-  .task-item {
+  .news-item {
     display: flex;
-    align-items: center;
     gap: 10px;
     padding: 8px 14px;
     border-bottom: 1px solid var(--border);
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
+    align-items: flex-start;
   }
 
-  .task-item:last-child { border-bottom: none; }
-  .task-item:hover { background: rgba(200,146,42,0.05); }
+  .news-item:hover { background: rgba(200,146,42,0.05); }
+  .news-item:last-child { border-bottom: none; }
 
-  .task-cb {
-    width: 15px; height: 15px;
-    border: 1.5px solid var(--border-bright);
-    border-radius: 2px;
+  .news-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-gold);
     flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    background: var(--bg-card2);
-    transition: all 0.15s;
+    margin-top: 5px;
   }
 
-  .task-item.done .task-cb {
-    background: var(--accent-green);
-    border-color: var(--accent-green);
-  }
-
-  .task-item.done .task-text {
-    text-decoration: line-through;
-    color: var(--text-muted);
-  }
-
-  .task-text {
-    font-size: 12px;
+  .news-text {
     font-family: 'Rajdhani', sans-serif;
+    font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.3px;
+    line-height: 1.4;
+    color: var(--text-primary);
+    flex: 1;
   }
+
+  .news-source {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  .news-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    color: var(--text-muted);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  /* PH NEWS with flag accent */
+  .ph-news-panel .panel-header h2 { color: #4a8fc4; }
+  .ph-news-panel .news-dot { background: #4a8fc4; }
+  .ph-news-panel .news-item:hover { background: rgba(74,143,196,0.05); }
 
   /* D&D PANEL */
   .dnd-panel {
     background: linear-gradient(160deg, #120a08 0%, #0d0806 100%);
     border-color: #4a2a18;
-    flex: 1;
-    overflow: hidden;
   }
 
   .dnd-panel .panel-header h2 { color: #c87040; }
 
-  .dnd-body {
-    padding: 10px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+  .dnd-body { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
 
-  /* Character identity */
   .dnd-char-header {
     display: flex;
     align-items: center;
@@ -828,43 +814,14 @@
     flex-shrink: 0;
   }
 
-  .dnd-level-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 6px;
-    color: rgba(255,255,255,0.7);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    line-height: 1;
-  }
+  .dnd-level-label { font-family: 'Share Tech Mono', monospace; font-size: 6px; color: rgba(255,255,255,0.7); letter-spacing: 0.5px; text-transform: uppercase; line-height: 1; }
+  .dnd-level-num { font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 700; color: #fff; line-height: 1; }
 
-  .dnd-level-num {
-    font-family: 'Oswald', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1;
-  }
-
-  /* HP Bar */
-  .dnd-hp-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .dnd-hp-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 8px;
-    color: #8a5040;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    width: 20px;
-    flex-shrink: 0;
-  }
+  .dnd-hp-row { display: flex; align-items: center; gap: 8px; }
+  .dnd-hp-label { font-family: 'Share Tech Mono', monospace; font-size: 8px; color: #8a5040; letter-spacing: 1px; text-transform: uppercase; width: 20px; flex-shrink: 0; }
 
   .dnd-bar-track {
-    flex: 1;
-    height: 10px;
+    flex: 1; height: 10px;
     background: rgba(0,0,0,0.5);
     border: 1px solid #3a1808;
     border-radius: 2px;
@@ -872,42 +829,15 @@
     position: relative;
   }
 
-  .dnd-bar-fill {
-    height: 100%;
-    border-radius: 1px;
-    transition: width 0.6s ease;
-    position: relative;
-  }
-
+  .dnd-bar-fill { height: 100%; border-radius: 1px; transition: width 0.6s ease; position: relative; }
   .dnd-bar-fill.hp { background: linear-gradient(90deg, #8a1a1a, #cc2233); box-shadow: 0 0 8px rgba(200,34,51,0.5); }
   .dnd-bar-fill.mp { background: linear-gradient(90deg, #1a1a8a, #2244cc); box-shadow: 0 0 8px rgba(34,68,200,0.5); }
   .dnd-bar-fill.xp { background: linear-gradient(90deg, #3a6a10, #55aa20); box-shadow: 0 0 8px rgba(85,170,32,0.5); }
+  .dnd-bar-fill::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 40%; background: rgba(255,255,255,0.15); border-radius: 1px; }
 
-  .dnd-bar-fill::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 40%;
-    background: rgba(255,255,255,0.15);
-    border-radius: 1px;
-  }
+  .dnd-bar-val { font-family: 'Share Tech Mono', monospace; font-size: 9px; color: #9a7050; width: 32px; text-align: right; flex-shrink: 0; letter-spacing: 0.5px; }
 
-  .dnd-bar-val {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 9px;
-    color: #9a7050;
-    width: 32px;
-    text-align: right;
-    flex-shrink: 0;
-    letter-spacing: 0.5px;
-  }
-
-  /* Ability Scores */
-  .dnd-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-  }
+  .dnd-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
 
   .dnd-stat {
     background: rgba(0,0,0,0.4);
@@ -915,56 +845,19 @@
     border-radius: 3px;
     padding: 5px 4px;
     text-align: center;
-    position: relative;
     cursor: default;
     transition: border-color 0.15s;
   }
 
   .dnd-stat:hover { border-color: #c87040; }
+  .dnd-stat-name { font-family: 'Share Tech Mono', monospace; font-size: 7px; color: #6a4828; letter-spacing: 1px; text-transform: uppercase; }
+  .dnd-stat-val { font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 700; color: #e8c090; line-height: 1.1; }
+  .dnd-stat-mod { font-family: 'Share Tech Mono', monospace; font-size: 9px; color: #c87040; }
 
-  .dnd-stat-name {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 7px;
-    color: #6a4828;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
+  .dnd-dice-section { border-top: 1px solid #3a2010; padding-top: 8px; }
+  .dnd-dice-label { font-family: 'Share Tech Mono', monospace; font-size: 8px; color: #6a4828; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
 
-  .dnd-stat-val {
-    font-family: 'Oswald', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: #e8c090;
-    line-height: 1.1;
-  }
-
-  .dnd-stat-mod {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 9px;
-    color: #c87040;
-    margin-top: 0px;
-  }
-
-  /* Dice roller */
-  .dnd-dice-section {
-    border-top: 1px solid #3a2010;
-    padding-top: 8px;
-  }
-
-  .dnd-dice-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 8px;
-    color: #6a4828;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .dnd-dice-row {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-  }
+  .dnd-dice-row { display: flex; gap: 4px; flex-wrap: wrap; }
 
   .dnd-die {
     background: linear-gradient(145deg, #2a1a0e, #1a0e06);
@@ -981,17 +874,9 @@
     flex: 1;
     min-width: 30px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
   }
 
-  .dnd-die:hover {
-    background: linear-gradient(145deg, #4a2a18, #3a1a0e);
-    border-color: #c87040;
-    box-shadow: 0 0 10px rgba(200,112,64,0.3);
-    color: #fff;
-  }
-
+  .dnd-die:hover { background: linear-gradient(145deg, #4a2a18, #3a1a0e); border-color: #c87040; box-shadow: 0 0 10px rgba(200,112,64,0.3); color: #fff; }
   .dnd-die:active { transform: scale(0.93); }
 
   .dnd-result-box {
@@ -1006,66 +891,20 @@
     min-height: 32px;
   }
 
-  .dnd-result-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 8px;
-    color: #6a4828;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-  }
-
-  .dnd-result-value {
-    font-family: 'Oswald', sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: #e8c090;
-    transition: all 0.2s;
-    text-shadow: 0 0 10px rgba(232,192,144,0.5);
-  }
-
+  .dnd-result-label { font-family: 'Share Tech Mono', monospace; font-size: 8px; color: #6a4828; letter-spacing: 1.5px; text-transform: uppercase; }
+  .dnd-result-value { font-family: 'Oswald', sans-serif; font-size: 22px; font-weight: 700; color: #e8c090; transition: all 0.2s; text-shadow: 0 0 10px rgba(232,192,144,0.5); }
   .dnd-result-value.crit { color: #ffcc00; text-shadow: 0 0 16px rgba(255,204,0,0.8); animation: critFlash 0.5s ease; }
   .dnd-result-value.fumble { color: #cc2233; text-shadow: 0 0 16px rgba(204,34,51,0.8); animation: critFlash 0.5s ease; }
 
-  @keyframes critFlash {
-    0% { transform: scale(1.5); }
-    100% { transform: scale(1); }
-  }
+  @keyframes critFlash { 0% { transform: scale(1.5); } 100% { transform: scale(1); } }
 
-  .dnd-result-die {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 9px;
-    color: #6a4828;
-    letter-spacing: 1px;
-  }
+  .dnd-result-die { font-family: 'Share Tech Mono', monospace; font-size: 9px; color: #6a4828; letter-spacing: 1px; }
 
-  /* Spell slots */
-  .dnd-spells {
-    border-top: 1px solid #3a2010;
-    padding-top: 8px;
-  }
+  .dnd-spells { border-top: 1px solid #3a2010; padding-top: 8px; }
 
-  .dnd-spell-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 5px;
-  }
-
-  .dnd-spell-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 8px;
-    color: #6a4828;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    width: 42px;
-    flex-shrink: 0;
-  }
-
-  .dnd-slot-dots {
-    display: flex;
-    gap: 4px;
-    flex: 1;
-  }
+  .dnd-spell-row { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+  .dnd-spell-label { font-family: 'Share Tech Mono', monospace; font-size: 8px; color: #6a4828; letter-spacing: 1px; text-transform: uppercase; width: 42px; flex-shrink: 0; }
+  .dnd-slot-dots { display: flex; gap: 4px; flex: 1; }
 
   .dnd-slot {
     width: 12px; height: 12px;
@@ -1076,25 +915,10 @@
     transition: all 0.15s;
   }
 
-  .dnd-slot.used {
-    background: transparent;
-    border-color: #3a2010;
-  }
+  .dnd-slot.used { background: transparent; border-color: #3a2010; }
+  .dnd-slot.filled { background: radial-gradient(circle, #8844cc, #441888); border-color: #aa66ff; box-shadow: 0 0 6px rgba(170,102,255,0.6); }
 
-  .dnd-slot.filled {
-    background: radial-gradient(circle, #8844cc, #441888);
-    border-color: #aa66ff;
-    box-shadow: 0 0 6px rgba(170,102,255,0.6);
-  }
-
-  /* Condition badges */
-  .dnd-conditions {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-    border-top: 1px solid #3a2010;
-    padding-top: 8px;
-  }
+  .dnd-conditions { display: flex; gap: 4px; flex-wrap: wrap; border-top: 1px solid #3a2010; padding-top: 8px; }
 
   .dnd-condition {
     font-family: 'Share Tech Mono', monospace;
@@ -1108,43 +932,18 @@
     border: 1px solid;
   }
 
-  .dnd-condition.inactive {
-    background: rgba(0,0,0,0.3);
-    color: #4a3020;
-    border-color: #2a1808;
-  }
-
-  .dnd-condition.active-cond {
-    background: rgba(200,34,51,0.2);
-    color: #cc4444;
-    border-color: rgba(200,34,51,0.4);
-    box-shadow: 0 0 6px rgba(200,34,51,0.2);
-  }
-
-  .dnd-condition.active-cond.blessed {
-    background: rgba(255,204,0,0.15);
-    color: #ddaa22;
-    border-color: rgba(255,204,0,0.3);
-  }
-
-  .dnd-condition.active-cond.hasted {
-    background: rgba(85,204,85,0.15);
-    color: #55cc55;
-    border-color: rgba(85,204,85,0.3);
-  }
-
-  .dnd-condition.active-cond.raging {
-    background: rgba(255,68,0,0.2);
-    color: #ff6622;
-    border-color: rgba(255,68,0,0.4);
-  }
+  .dnd-condition.inactive { background: rgba(0,0,0,0.3); color: #4a3020; border-color: #2a1808; }
+  .dnd-condition.active-cond { background: rgba(200,34,51,0.2); color: #cc4444; border-color: rgba(200,34,51,0.4); box-shadow: 0 0 6px rgba(200,34,51,0.2); }
+  .dnd-condition.active-cond.blessed { background: rgba(255,204,0,0.15); color: #ddaa22; border-color: rgba(255,204,0,0.3); }
+  .dnd-condition.active-cond.hasted { background: rgba(85,204,85,0.15); color: #55cc55; border-color: rgba(85,204,85,0.3); }
+  .dnd-condition.active-cond.raging { background: rgba(255,68,0,0.2); color: #ff6622; border-color: rgba(255,68,0,0.4); }
 
   /* SCROLLBAR */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: var(--bg-dark); }
   ::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
 
-  /* SCAN LINE EFFECT */
+  /* SCAN LINE */
   body::after {
     content: '';
     position: fixed;
@@ -1154,7 +953,6 @@
     z-index: 9999;
   }
 
-  /* RESPONSIVE */
   @media (max-width: 1100px) {
     .main { grid-template-columns: 200px 1fr; }
     .right-col { grid-column: 1 / 3; grid-row: 3; display: grid; grid-template-columns: 1fr 1fr; }
@@ -1169,7 +967,7 @@
     <div class="logo-icon">🦅</div>
     <div class="brand-block">
       <h1>Phoenix Command Center</h1>
-      <p>CMD Centre v1.0 &nbsp;·&nbsp; Systems Active</p>
+      <p>CMD Centre v2.0 &nbsp;·&nbsp; Systems Active</p>
     </div>
   </div>
   <div class="topbar-center">
@@ -1188,8 +986,6 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-
-    <!-- QUICK LAUNCH -->
     <div class="panel quick-launch">
       <div class="panel-header">
         <h2>Quick Launch</h2>
@@ -1220,14 +1016,14 @@
         <div class="launcher-icon" style="background: linear-gradient(135deg,#e50914,#831010);">N</div>
         <div>
           <div class="launcher-name">Netflix</div>
-          <div class="launcher-desc">Series & Films</div>
+          <div class="launcher-desc">Series &amp; Films</div>
         </div>
       </a>
-      <a class="launcher-item" href="https://www.amazon.com.au" target="_blank">
+      <a class="launcher-item" href="https://www.amazon.com" target="_blank">
         <div class="launcher-icon" style="background: linear-gradient(135deg,#ff9900,#e47911);">📦</div>
         <div>
-          <div class="launcher-name">Amazon</div>
-          <div class="launcher-desc">Shopping</div>
+          <div class="launcher-name">Amazon US</div>
+          <div class="launcher-desc">Shopping · USA</div>
         </div>
       </a>
       <a class="launcher-item" href="https://esaweb.myabsorb.com/#/login" target="_blank">
@@ -1239,43 +1035,43 @@
       </a>
     </div>
 
-    <!-- NOTES -->
     <div class="panel notes-panel">
       <div class="panel-header">
         <h2>Notes</h2>
         <div class="panel-header-line"></div>
         <span style="font-size:10px; color: var(--text-muted);">📝</span>
       </div>
-      <textarea placeholder="Quick notes...&#10;&#10;• Ideas&#10;• Reminders&#10;• Anything"></textarea>
+      <textarea id="notes-area" placeholder="Quick notes...&#10;&#10;• Ideas&#10;• Reminders&#10;• Anything"></textarea>
     </div>
-
   </aside>
 
   <!-- CENTER -->
   <div class="center-col">
 
-    <!-- WEATHER + ANIME SPLIT PANEL -->
+    <!-- WEATHER + ANIME -->
     <div class="panel weather-panel">
       <div class="panel-header">
-        <h2>Weather</h2>
+        <h2>⛅ Weather</h2>
         <div class="panel-header-line"></div>
-        <span style="font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-muted); letter-spacing:1.5px; text-transform:uppercase;">Anchorage, Alaska — The Last Frontier</span>
+        <span style="font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-muted); letter-spacing:1.5px; text-transform:uppercase;">ANC · CEBu</span>
         <div class="panel-header-line"></div>
         <h2>Now Watching</h2>
         <div class="panel-header-line"></div>
         <span id="anime-header-name" style="font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--accent-amber); letter-spacing:1.5px; text-transform:uppercase;">Demon Slayer</span>
       </div>
       <div class="weather-anime-split">
-        <!-- LEFT: WEATHER -->
         <div class="weather-half">
-          <div id="weather-body">
-            <div class="weather-loading">
-              <div class="loading-spinner"></div>
-              ACQUIRING DATA
+          <div class="dual-weather">
+            <div class="city-weather-block" id="weather-alaska">
+              <div class="city-label">🇺🇸 Anchorage, Alaska</div>
+              <div class="weather-loading"><div class="loading-spinner"></div>ACQUIRING</div>
+            </div>
+            <div class="city-weather-block" id="weather-cebu">
+              <div class="city-label">🇵🇭 Cebu, Philippines</div>
+              <div class="weather-loading"><div class="loading-spinner"></div>ACQUIRING</div>
             </div>
           </div>
         </div>
-        <!-- RIGHT: ANIME ANIMATION -->
         <div class="anime-half">
           <canvas id="animeCanvas"></canvas>
           <div class="anime-overlay"></div>
@@ -1296,11 +1092,32 @@
         <h2>To Do List</h2>
         <div class="panel-header-line"></div>
         <span id="todo-count" style="font-family:'Share Tech Mono',monospace; font-size:9px; color:var(--text-muted);">0 remaining</span>
+        <div class="panel-header-line"></div>
+        <span id="ls-indicator" style="font-family:'Share Tech Mono',monospace; font-size:8px; color:var(--accent-green); letter-spacing:1px;">💾 LOCAL</span>
       </div>
       <div class="todo-list" id="todo-list"></div>
       <div class="todo-add">
         <input type="text" id="todo-input" placeholder="Add new task... (press Enter)">
         <button class="todo-add-btn" onclick="addTodo()">+ ADD</button>
+      </div>
+      <div class="todo-sync-bar">
+        <span class="sync-status" id="sync-status">Saved to local storage · refreshes retained</span>
+        <button class="sync-btn" onclick="clearDoneTodos()">Clear Done</button>
+        <button class="sync-btn" onclick="clearAllTodos()">Clear All</button>
+      </div>
+    </div>
+
+    <!-- WORLD NEWS -->
+    <div class="panel news-panel">
+      <div class="panel-header">
+        <h2>🌍 World News</h2>
+        <div class="panel-header-line"></div>
+        <span id="world-news-time" style="font-family:'Share Tech Mono',monospace; font-size:8px; color:var(--text-muted); letter-spacing:1px;">Loading...</span>
+        <div class="panel-header-line"></div>
+        <button class="sync-btn" onclick="loadWorldNews()" style="font-size:8px; padding:2px 8px;">↻ Refresh</button>
+      </div>
+      <div class="news-list" id="world-news-list">
+        <div class="news-loading"><div class="loading-spinner"></div>FETCHING HEADLINES</div>
       </div>
     </div>
 
@@ -1309,7 +1126,7 @@
   <!-- RIGHT COLUMN -->
   <div class="right-col">
 
-    <!-- BIBLE VERSE -->
+    <!-- BIBLE -->
     <div class="panel bible-panel">
       <div class="panel-header">
         <h2>Daily Word ✝</h2>
@@ -1326,25 +1143,15 @@
       </div>
     </div>
 
-    <!-- TODAY'S TASKS -->
-    <div class="panel tasks-panel">
+    <!-- PH NEWS -->
+    <div class="panel news-panel ph-news-panel">
       <div class="panel-header">
-        <h2>Today's Tasks</h2>
+        <h2>🇵🇭 Philippines News</h2>
         <div class="panel-header-line"></div>
+        <button class="sync-btn" onclick="loadPhNews()" style="font-size:8px; padding:2px 8px;">↻</button>
       </div>
-      <div class="task-list" id="task-list">
-        <div class="task-item" onclick="toggleTask(this)">
-          <div class="task-cb"></div>
-          <span class="task-text">Morning devotion</span>
-        </div>
-        <div class="task-item" onclick="toggleTask(this)">
-          <div class="task-cb"></div>
-          <span class="task-text">Review to-do list</span>
-        </div>
-        <div class="task-item" onclick="toggleTask(this)">
-          <div class="task-cb"></div>
-          <span class="task-text">Check emails</span>
-        </div>
+      <div class="news-list" id="ph-news-list">
+        <div class="news-loading"><div class="loading-spinner"></div>FETCHING</div>
       </div>
     </div>
 
@@ -1357,7 +1164,6 @@
       </div>
       <div class="dnd-body">
 
-        <!-- Character Header -->
         <div class="dnd-char-header">
           <div class="dnd-avatar" id="dnd-avatar">🧙</div>
           <div class="dnd-char-info">
@@ -1370,32 +1176,24 @@
           </div>
         </div>
 
-        <!-- HP / MP / XP Bars -->
         <div style="display:flex;flex-direction:column;gap:5px;">
           <div class="dnd-hp-row">
             <div class="dnd-hp-label">HP</div>
-            <div class="dnd-bar-track">
-              <div class="dnd-bar-fill hp" id="hp-bar" style="width:72%"></div>
-            </div>
+            <div class="dnd-bar-track"><div class="dnd-bar-fill hp" id="hp-bar" style="width:72%"></div></div>
             <div class="dnd-bar-val" id="hp-val">36/50</div>
           </div>
           <div class="dnd-hp-row">
             <div class="dnd-hp-label" style="color:#4040aa;">MP</div>
-            <div class="dnd-bar-track">
-              <div class="dnd-bar-fill mp" id="mp-bar" style="width:55%"></div>
-            </div>
+            <div class="dnd-bar-track"><div class="dnd-bar-fill mp" id="mp-bar" style="width:55%"></div></div>
             <div class="dnd-bar-val" id="mp-val">11/20</div>
           </div>
           <div class="dnd-hp-row">
             <div class="dnd-hp-label" style="color:#3a6a10;">XP</div>
-            <div class="dnd-bar-track">
-              <div class="dnd-bar-fill xp" id="xp-bar" style="width:68%"></div>
-            </div>
+            <div class="dnd-bar-track"><div class="dnd-bar-fill xp" id="xp-bar" style="width:68%"></div></div>
             <div class="dnd-bar-val" id="xp-val">6800/10k</div>
           </div>
         </div>
 
-        <!-- Ability Scores -->
         <div class="dnd-stats-grid" id="dnd-stats">
           <div class="dnd-stat"><div class="dnd-stat-name">STR</div><div class="dnd-stat-val" id="stat-str">8</div><div class="dnd-stat-mod" id="mod-str">−1</div></div>
           <div class="dnd-stat"><div class="dnd-stat-name">DEX</div><div class="dnd-stat-val" id="stat-dex">14</div><div class="dnd-stat-mod" id="mod-dex">+2</div></div>
@@ -1405,7 +1203,6 @@
           <div class="dnd-stat"><div class="dnd-stat-name">CHA</div><div class="dnd-stat-val" id="stat-cha">18</div><div class="dnd-stat-mod" id="mod-cha">+4</div></div>
         </div>
 
-        <!-- Dice Roller -->
         <div class="dnd-dice-section">
           <div class="dnd-dice-label">// Roll the Dice</div>
           <div class="dnd-dice-row">
@@ -1423,24 +1220,13 @@
           </div>
         </div>
 
-        <!-- Spell Slots -->
         <div class="dnd-spells">
           <div class="dnd-dice-label">// Spell Slots</div>
-          <div class="dnd-spell-row">
-            <div class="dnd-spell-label">1st · 4</div>
-            <div class="dnd-slot-dots" id="slots-1"></div>
-          </div>
-          <div class="dnd-spell-row">
-            <div class="dnd-spell-label">2nd · 3</div>
-            <div class="dnd-slot-dots" id="slots-2"></div>
-          </div>
-          <div class="dnd-spell-row">
-            <div class="dnd-spell-label">3rd · 2</div>
-            <div class="dnd-slot-dots" id="slots-3"></div>
-          </div>
+          <div class="dnd-spell-row"><div class="dnd-spell-label">1st · 4</div><div class="dnd-slot-dots" id="slots-1"></div></div>
+          <div class="dnd-spell-row"><div class="dnd-spell-label">2nd · 3</div><div class="dnd-slot-dots" id="slots-2"></div></div>
+          <div class="dnd-spell-row"><div class="dnd-spell-label">3rd · 2</div><div class="dnd-slot-dots" id="slots-3"></div></div>
         </div>
 
-        <!-- Conditions -->
         <div class="dnd-conditions">
           <div class="dnd-condition inactive" onclick="toggleCondition(this)" data-cond="poisoned">Poisoned</div>
           <div class="dnd-condition active-cond blessed" onclick="toggleCondition(this)" data-cond="blessed">Blessed ✨</div>
@@ -1458,6 +1244,29 @@
 </div>
 
 <script>
+// ── GOOGLE SHEETS SYNC CONFIG ──────────────────────────
+const GSHEET_URL = 'https://script.google.com/macros/s/AKfycby_UubvP2oCbfYA5lbDFD-vRuhclBgxxzVfIyQcsemJ_FPbvKXRZ3AGNYAtgBJUvDZLDA/exec';
+
+// Generic GSheet fetch helper
+async function gsFetch(params) {
+  try {
+    const url = GSHEET_URL + '?' + new URLSearchParams(params).toString();
+    const res = await fetch(url);
+    return await res.json();
+  } catch(e) {
+    console.warn('GSheet sync error:', e);
+    return { status: 'error' };
+  }
+}
+
+// Sync status display helper
+function setSyncStatus(msg, type = '') {
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  el.className = 'sync-status' + (type ? ' ' + type : '');
+  el.textContent = msg;
+}
+
 // ── CLOCK ──────────────────────────────────────────────
 function updateClock() {
   const now = new Date();
@@ -1472,7 +1281,40 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// ── WEATHER ────────────────────────────────────────────
+// ── NOTES — localStorage + GSheets ───────────────────
+const notesArea = document.getElementById('notes-area');
+
+async function loadNotes() {
+  // Load from localStorage instantly
+  notesArea.value = localStorage.getItem('phoenix_notes') || '';
+  // Then fetch from GSheets (source of truth for cross-browser)
+  const res = await gsFetch({ action: 'getNotes' });
+  if (res.status === 'ok' && res.content !== undefined) {
+    notesArea.value = res.content;
+    localStorage.setItem('phoenix_notes', res.content);
+  }
+}
+
+let notesSaveTimer = null;
+notesArea.addEventListener('input', () => {
+  localStorage.setItem('phoenix_notes', notesArea.value);
+  // Debounce GSheets save — wait 1.5s after user stops typing
+  clearTimeout(notesSaveTimer);
+  notesSaveTimer = setTimeout(async () => {
+    setSyncStatus('⟳ Syncing notes...', 'syncing');
+    const res = await gsFetch({ action: 'saveNotes', content: notesArea.value });
+    if (res.status === 'ok') {
+      setSyncStatus('✓ Notes synced · ' + new Date().toLocaleTimeString(), 'synced');
+      setTimeout(() => setSyncStatus('✓ All data synced to Google Sheets'), 3000);
+    } else {
+      setSyncStatus('⚠ Sync failed — saved locally only', 'error');
+    }
+  }, 1500);
+});
+
+loadNotes();
+
+// ── WEATHER (Imperial) ────────────────────────────────
 const WMO_ICONS = {
   0: ['☀️','Clear Sky'], 1: ['🌤️','Mainly Clear'], 2: ['⛅','Partly Cloudy'],
   3: ['☁️','Overcast'], 45: ['🌫️','Foggy'], 48: ['🌫️','Icy Fog'],
@@ -1484,10 +1326,12 @@ const WMO_ICONS = {
 };
 
 function getWMO(code) { return WMO_ICONS[code] || ['🌡️','Unknown']; }
-
 const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
-async function loadWeather(lat, lon, cityName) {
+function cToF(c) { return Math.round(c * 9/5 + 32); }
+function kmhToMph(k) { return Math.round(k * 0.621371); }
+
+async function loadCityWeather(lat, lon, elementId) {
   try {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code,apparent_temperature&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto&forecast_days=5`;
     const r = await fetch(url);
@@ -1505,610 +1349,154 @@ async function loadWeather(lat, lon, cityName) {
         <div class="forecast-day">
           <div class="forecast-day-name">${dayName}</div>
           <div class="forecast-icon">${fi}</div>
-          <div class="forecast-temp">${Math.round(daily.temperature_2m_max[i])}°/${Math.round(daily.temperature_2m_min[i])}°</div>
+          <div class="forecast-temp">${cToF(daily.temperature_2m_max[i])}°/${cToF(daily.temperature_2m_min[i])}°</div>
         </div>`;
     }
 
-    document.getElementById('weather-body').innerHTML = `
-      <div class="weather-content">
-        <div class="weather-main">
-          <div>
-            <div class="weather-temp">${Math.round(c.temperature_2m)}<sup>°C</sup></div>
-            <div class="weather-desc">${desc}</div>
-            <div class="weather-location">${cityName}</div>
-          </div>
-          <div class="weather-right">
-            <div class="weather-icon-big">${icon}</div>
-          </div>
+    const container = document.getElementById(elementId);
+    const labelEl = container.querySelector('.city-label');
+    const labelHTML = labelEl ? labelEl.outerHTML : '';
+    container.innerHTML = labelHTML + `
+      <div class="weather-main" style="margin-bottom:6px;">
+        <div>
+          <div class="weather-temp">${cToF(c.temperature_2m)}<sup>°F</sup></div>
+          <div class="weather-desc">${desc}</div>
         </div>
-        <div class="weather-details">
-          <div class="weather-detail"><div class="weather-detail-label">Feels Like</div><div class="weather-detail-value">${Math.round(c.apparent_temperature)}°</div></div>
-          <div class="weather-detail"><div class="weather-detail-label">Humidity</div><div class="weather-detail-value">${c.relative_humidity_2m}%</div></div>
-          <div class="weather-detail"><div class="weather-detail-label">Wind</div><div class="weather-detail-value">${Math.round(c.wind_speed_10m)}km/h</div></div>
-          <div class="weather-detail"><div class="weather-detail-label">UV / Vis</div><div class="weather-detail-value" style="font-size:10px;">AK</div></div>
+        <div style="text-align:right;">
+          <div class="weather-icon-big">${icon}</div>
         </div>
-        <div class="weather-forecast">${forecastHTML}</div>
-      </div>`;
+      </div>
+      <div class="weather-sub-details">
+        <div class="wsd">Feels <span>${cToF(c.apparent_temperature)}°F</span></div>
+        <div class="wsd">Humidity <span>${c.relative_humidity_2m}%</span></div>
+        <div class="wsd">Wind <span>${kmhToMph(c.wind_speed_10m)}mph</span></div>
+      </div>
+      <div class="weather-forecast" style="margin-top:6px;">${forecastHTML}</div>`;
   } catch(e) {
-    document.getElementById('weather-body').innerHTML = `<div class="weather-loading">⚠ NO SIGNAL</div>`;
+    document.getElementById(elementId).innerHTML += `<div class="weather-loading" style="height:60px;">⚠ NO SIGNAL</div>`;
   }
 }
 
-function initWeather() {
-  loadWeather(61.2181, -149.9003, 'Anchorage, Alaska');
-}
-initWeather();
+// Load both cities
+loadCityWeather(61.2181, -149.9003, 'weather-alaska');
+loadCityWeather(10.3157, 123.8854, 'weather-cebu');
 
 // ── ANIME CANVAS ENGINE ────────────────────────────────
 const ANIME_SHOWS = [
-  {
-    name: 'Demon Slayer',
-    sub: 'Kimetsu no Yaiba',
-    bgColors: ['#0a0010', '#1a0030', '#2a0020'],
-    accentColor: '#ff2244',
-    accentColor2: '#8800ff',
-    particleColor: '#ff6688',
-    type: 'demon_slayer'
-  },
-  {
-    name: 'Naruto',
-    sub: 'Shippuden',
-    bgColors: ['#0a1500', '#001520', '#001800'],
-    accentColor: '#ff6600',
-    accentColor2: '#0088ff',
-    particleColor: '#ffaa44',
-    type: 'naruto'
-  },
-  {
-    name: 'Attack on Titan',
-    sub: 'Shingeki no Kyojin',
-    bgColors: ['#080808', '#100a00', '#0a0a10'],
-    accentColor: '#44aaff',
-    accentColor2: '#ffaa00',
-    particleColor: '#88ccff',
-    type: 'aot'
-  },
-  {
-    name: 'Dragon Ball Z',
-    sub: 'Super Saiyan Arc',
-    bgColors: ['#000510', '#050018', '#000010'],
-    accentColor: '#ffdd00',
-    accentColor2: '#00aaff',
-    particleColor: '#ffee88',
-    type: 'dbz'
-  },
-  {
-    name: 'One Piece',
-    sub: 'Grand Line',
-    bgColors: ['#001030', '#000820', '#001840'],
-    accentColor: '#ff4400',
-    accentColor2: '#ffcc00',
-    particleColor: '#ff8844',
-    type: 'onepiece'
-  },
-  {
-    name: 'Jujutsu Kaisen',
-    sub: 'Cursed Energy',
-    bgColors: ['#050010', '#0a0018', '#080014'],
-    accentColor: '#aa00ff',
-    accentColor2: '#ff0044',
-    particleColor: '#cc44ff',
-    type: 'jjk'
-  },
+  { name: 'Demon Slayer', sub: 'Kimetsu no Yaiba', bgColors: ['#0a0010','#1a0030','#2a0020'], accentColor: '#ff2244', accentColor2: '#8800ff', particleColor: '#ff6688', type: 'demon_slayer' },
+  { name: 'Naruto', sub: 'Shippuden', bgColors: ['#0a1500','#001520','#001800'], accentColor: '#ff6600', accentColor2: '#0088ff', particleColor: '#ffaa44', type: 'naruto' },
+  { name: 'Attack on Titan', sub: 'Shingeki no Kyojin', bgColors: ['#080808','#100a00','#0a0a10'], accentColor: '#44aaff', accentColor2: '#ffaa00', particleColor: '#88ccff', type: 'aot' },
+  { name: 'Dragon Ball Z', sub: 'Super Saiyan Arc', bgColors: ['#000510','#050018','#000010'], accentColor: '#ffdd00', accentColor2: '#00aaff', particleColor: '#ffee88', type: 'dbz' },
+  { name: 'One Piece', sub: 'Grand Line', bgColors: ['#001030','#000820','#001840'], accentColor: '#ff4400', accentColor2: '#ffcc00', particleColor: '#ff8844', type: 'onepiece' },
+  { name: 'Jujutsu Kaisen', sub: 'Cursed Energy', bgColors: ['#050010','#0a0018','#080014'], accentColor: '#aa00ff', accentColor2: '#ff0044', particleColor: '#cc44ff', type: 'jjk' },
 ];
 
 let animeIndex = 0;
-let animeTransition = 0; // 0=stable, 1=transitioning out
-let animeAlpha = 1;
-const SHOW_DURATION = 7000;
-let animeTimer = null;
-
 const canvas = document.getElementById('animeCanvas');
 const ctx = canvas.getContext('2d');
 
-function resizeCanvas() {
-  const parent = canvas.parentElement;
-  canvas.width = parent.offsetWidth;
-  canvas.height = parent.offsetHeight;
-}
+function resizeCanvas() { const p = canvas.parentElement; canvas.width = p.offsetWidth; canvas.height = p.offsetHeight; }
 
-// Particle systems per show
 class Particle {
-  constructor(w, h, show) {
-    this.w = w; this.h = h; this.show = show;
-    this.reset();
-  }
-  reset() {
-    this.x = Math.random() * this.w;
-    this.y = Math.random() * this.h;
-    this.size = Math.random() * 3 + 0.5;
-    this.alpha = Math.random() * 0.8 + 0.2;
-    this.vx = (Math.random() - 0.5) * 1.5;
-    this.vy = (Math.random() - 0.5) * 1.5;
-    this.life = 0;
-    this.maxLife = 120 + Math.random() * 180;
-  }
-  update() {
-    this.x += this.vx;
-    this.y += this.vy;
-    this.life++;
-    if (this.x < 0 || this.x > this.w || this.y < 0 || this.y > this.h || this.life > this.maxLife) this.reset();
-  }
-  draw(ctx, color, alpha) {
-    ctx.save();
-    ctx.globalAlpha = this.alpha * alpha;
-    ctx.fillStyle = color;
-    ctx.shadowBlur = 8;
-    ctx.shadowColor = color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
+  constructor(w, h) { this.w = w; this.h = h; this.reset(); }
+  reset() { this.x = Math.random()*this.w; this.y = Math.random()*this.h; this.size = Math.random()*3+0.5; this.alpha = Math.random()*0.8+0.2; this.vx = (Math.random()-0.5)*1.5; this.vy = (Math.random()-0.5)*1.5; this.life = 0; this.maxLife = 120+Math.random()*180; }
+  update() { this.x += this.vx; this.y += this.vy; this.life++; if (this.x<0||this.x>this.w||this.y<0||this.y>this.h||this.life>this.maxLife) this.reset(); }
+  draw(ctx, color) { ctx.save(); ctx.globalAlpha = this.alpha; ctx.fillStyle = color; ctx.shadowBlur = 8; ctx.shadowColor = color; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); ctx.restore(); }
 }
 
-// Per-show animated effects
 class AnimeScene {
-  constructor(show, w, h) {
-    this.show = show;
-    this.w = w; this.h = h;
-    this.t = 0;
-    this.particles = Array.from({length: 60}, () => new Particle(w, h, show));
-    // lightning bolts
-    this.bolts = [];
-    this.boltTimer = 0;
-    // slash effects
-    this.slashes = [];
-    this.slashTimer = 0;
-    // circles
-    this.rings = [];
-    this.ringTimer = 0;
-  }
-
-  addBolt() {
-    this.bolts.push({ t: 0, maxT: 20, x1: Math.random()*this.w, y1: 0, x2: Math.random()*this.w, y2: this.h, segs: 8 });
-  }
-
-  addSlash() {
-    const cx = Math.random() * this.w;
-    const cy = Math.random() * this.h;
-    const angle = Math.random() * Math.PI;
-    const len = 60 + Math.random() * 80;
-    this.slashes.push({ t: 0, maxT: 30, cx, cy, angle, len });
-  }
-
-  addRing() {
-    this.rings.push({ t: 0, maxT: 50, x: this.w/2 + (Math.random()-0.5)*this.w*0.6, y: this.h/2 + (Math.random()-0.5)*this.h*0.6, maxR: 80 + Math.random()*60 });
-  }
-
+  constructor(show, w, h) { this.show = show; this.w = w; this.h = h; this.t = 0; this.particles = Array.from({length:60},()=>new Particle(w,h)); this.bolts = []; this.boltTimer = 0; this.slashes = []; this.slashTimer = 0; this.rings = []; this.ringTimer = 0; }
+  addBolt() { this.bolts.push({t:0,maxT:20,x1:Math.random()*this.w,y1:0,x2:Math.random()*this.w,y2:this.h,segs:8}); }
+  addSlash() { const cx=Math.random()*this.w,cy=Math.random()*this.h,angle=Math.random()*Math.PI,len=60+Math.random()*80; this.slashes.push({t:0,maxT:30,cx,cy,angle,len}); }
+  addRing() { this.rings.push({t:0,maxT:50,x:this.w/2+(Math.random()-0.5)*this.w*0.6,y:this.h/2+(Math.random()-0.5)*this.h*0.6,maxR:80+Math.random()*60}); }
   update() {
-    this.t++;
-    this.particles.forEach(p => p.update());
-
-    // Type-specific timers
+    this.t++; this.particles.forEach(p=>p.update());
     const type = this.show.type;
-    if (type === 'demon_slayer' || type === 'jjk') {
-      this.slashTimer++;
-      if (this.slashTimer > 40) { this.addSlash(); this.slashTimer = 0; }
-      this.slashes = this.slashes.filter(s => { s.t++; return s.t < s.maxT; });
-    }
-    if (type === 'naruto' || type === 'dbz') {
-      this.boltTimer++;
-      if (this.boltTimer > 35) { this.addBolt(); this.boltTimer = 0; }
-      this.bolts = this.bolts.filter(b => { b.t++; return b.t < b.maxT; });
-    }
-    if (type === 'aot' || type === 'onepiece') {
-      this.ringTimer++;
-      if (this.ringTimer > 55) { this.addRing(); this.ringTimer = 0; }
-      this.rings = this.rings.filter(r => { r.t++; return r.t < r.maxT; });
-    }
+    if (type==='demon_slayer'||type==='jjk') { this.slashTimer++; if(this.slashTimer>40){this.addSlash();this.slashTimer=0;} this.slashes=this.slashes.filter(s=>{s.t++;return s.t<s.maxT;}); }
+    if (type==='naruto'||type==='dbz') { this.boltTimer++; if(this.boltTimer>35){this.addBolt();this.boltTimer=0;} this.bolts=this.bolts.filter(b=>{b.t++;return b.t<b.maxT;}); }
+    if (type==='aot'||type==='onepiece') { this.ringTimer++; if(this.ringTimer>55){this.addRing();this.ringTimer=0;} this.rings=this.rings.filter(r=>{r.t++;return r.t<r.maxT;}); }
   }
-
   draw(ctx, alpha) {
-    const { w, h, t, show } = this;
-    ctx.save();
-    ctx.globalAlpha = alpha;
-
-    // Background gradient
-    const grad = ctx.createLinearGradient(0, 0, w, h);
-    show.bgColors.forEach((c, i) => grad.addColorStop(i / (show.bgColors.length - 1), c));
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, w, h);
-
-    // Draw background shapes / atmosphere
-    this.drawAtmosphere(ctx, alpha);
-
-    // Particles
-    this.particles.forEach(p => p.draw(ctx, show.particleColor, 1));
-
-    // Type-specific effects
-    const type = show.type;
-    if (type === 'demon_slayer') this.drawDemonSlayer(ctx);
-    else if (type === 'naruto') this.drawNaruto(ctx);
-    else if (type === 'aot') this.drawAOT(ctx);
-    else if (type === 'dbz') this.drawDBZ(ctx);
-    else if (type === 'onepiece') this.drawOnePiece(ctx);
-    else if (type === 'jjk') this.drawJJK(ctx);
-
-    // Central character silhouette
+    const {w,h,t,show} = this;
+    ctx.save(); ctx.globalAlpha = alpha;
+    const grad = ctx.createLinearGradient(0,0,w,h);
+    show.bgColors.forEach((c,i)=>grad.addColorStop(i/(show.bgColors.length-1),c));
+    ctx.fillStyle = grad; ctx.fillRect(0,0,w,h);
+    for(let i=0;i<3;i++){const ox=w*(0.2+i*0.3)+Math.sin(t*0.01+i)*30,oy=h*(0.3+i*0.2)+Math.cos(t*0.008+i)*20;const gr=ctx.createRadialGradient(ox,oy,0,ox,oy,80);gr.addColorStop(0,show.accentColor+'33');gr.addColorStop(1,'transparent');ctx.fillStyle=gr;ctx.beginPath();ctx.arc(ox,oy,80,0,Math.PI*2);ctx.fill();}
+    this.particles.forEach(p=>p.draw(ctx,show.particleColor));
+    if(show.type==='demon_slayer')this.drawDemonSlayer(ctx);
+    else if(show.type==='naruto')this.drawNaruto(ctx);
+    else if(show.type==='aot')this.drawAOT(ctx);
+    else if(show.type==='dbz')this.drawDBZ(ctx);
+    else if(show.type==='onepiece')this.drawOnePiece(ctx);
+    else if(show.type==='jjk')this.drawJJK(ctx);
     this.drawSilhouette(ctx);
-
     ctx.restore();
   }
-
-  drawAtmosphere(ctx, alpha) {
-    const { w, h, t, show } = this;
-    // Slow-moving glow orbs
-    for (let i = 0; i < 3; i++) {
-      const ox = w * (0.2 + i * 0.3) + Math.sin(t * 0.01 + i) * 30;
-      const oy = h * (0.3 + i * 0.2) + Math.cos(t * 0.008 + i) * 20;
-      const gr = ctx.createRadialGradient(ox, oy, 0, ox, oy, 80);
-      gr.addColorStop(0, show.accentColor + '33');
-      gr.addColorStop(1, 'transparent');
-      ctx.fillStyle = gr;
-      ctx.beginPath();
-      ctx.arc(ox, oy, 80, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
   drawSilhouette(ctx) {
-    const { w, h, t, show } = this;
-    const cx = w * 0.5;
-    const cy = h * 0.55;
-    const s = Math.min(w, h) * 0.45;
-    const bob = Math.sin(t * 0.04) * 3;
-
-    ctx.save();
-    ctx.translate(cx, cy + bob);
-
-    // Aura glow behind
-    const aura = ctx.createRadialGradient(0, 0, s * 0.2, 0, 0, s * 0.8);
-    aura.addColorStop(0, show.accentColor + '55');
-    aura.addColorStop(0.5, show.accentColor2 + '22');
-    aura.addColorStop(1, 'transparent');
-    ctx.fillStyle = aura;
-    ctx.beginPath();
-    ctx.arc(0, 0, s * 0.8, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Body silhouette
-    ctx.fillStyle = '#0a0a0a';
-    ctx.shadowBlur = 20;
-    ctx.shadowColor = show.accentColor;
-
-    // Head
-    ctx.beginPath();
-    ctx.arc(0, -s * 0.52, s * 0.13, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Body
-    ctx.beginPath();
-    ctx.moveTo(-s * 0.12, -s * 0.38);
-    ctx.lineTo(s * 0.12, -s * 0.38);
-    ctx.lineTo(s * 0.15, s * 0.05);
-    ctx.lineTo(-s * 0.15, s * 0.05);
-    ctx.closePath();
-    ctx.fill();
-
-    // Cape / cloak
-    ctx.beginPath();
-    ctx.moveTo(-s * 0.12, -s * 0.35);
-    ctx.bezierCurveTo(-s * 0.35, -s * 0.1, -s * 0.3, s * 0.3, -s * 0.05, s * 0.45);
-    ctx.lineTo(s * 0.05, s * 0.45);
-    ctx.bezierCurveTo(s * 0.3, s * 0.3, s * 0.35, -s * 0.1, s * 0.12, -s * 0.35);
-    ctx.fill();
-
-    // Legs
-    ctx.beginPath();
-    ctx.moveTo(-s * 0.1, s * 0.05);
-    ctx.lineTo(-s * 0.12, s * 0.42);
-    ctx.lineTo(-s * 0.04, s * 0.42);
-    ctx.lineTo(-s * 0.02, s * 0.05);
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(s * 0.02, s * 0.05);
-    ctx.lineTo(s * 0.04, s * 0.42);
-    ctx.lineTo(s * 0.12, s * 0.42);
-    ctx.lineTo(s * 0.1, s * 0.05);
-    ctx.fill();
-
-    // Sword (right arm extended)
-    ctx.strokeStyle = show.accentColor;
-    ctx.lineWidth = 3;
-    ctx.shadowBlur = 12;
-    ctx.shadowColor = show.accentColor;
-    ctx.beginPath();
-    ctx.moveTo(s * 0.13, -s * 0.2);
-    ctx.lineTo(s * 0.5, -s * 0.55 + Math.sin(t * 0.06) * 5);
-    ctx.stroke();
-
+    const {w,h,t,show} = this; const cx=w*0.5,cy=h*0.55,s=Math.min(w,h)*0.45,bob=Math.sin(t*0.04)*3;
+    ctx.save(); ctx.translate(cx,cy+bob);
+    const aura=ctx.createRadialGradient(0,0,s*0.2,0,0,s*0.8);aura.addColorStop(0,show.accentColor+'55');aura.addColorStop(0.5,show.accentColor2+'22');aura.addColorStop(1,'transparent');ctx.fillStyle=aura;ctx.beginPath();ctx.arc(0,0,s*0.8,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#0a0a0a';ctx.shadowBlur=20;ctx.shadowColor=show.accentColor;
+    ctx.beginPath();ctx.arc(0,-s*0.52,s*0.13,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.moveTo(-s*0.12,-s*0.38);ctx.lineTo(s*0.12,-s*0.38);ctx.lineTo(s*0.15,s*0.05);ctx.lineTo(-s*0.15,s*0.05);ctx.closePath();ctx.fill();
+    ctx.beginPath();ctx.moveTo(-s*0.12,-s*0.35);ctx.bezierCurveTo(-s*0.35,-s*0.1,-s*0.3,s*0.3,-s*0.05,s*0.45);ctx.lineTo(s*0.05,s*0.45);ctx.bezierCurveTo(s*0.3,s*0.3,s*0.35,-s*0.1,s*0.12,-s*0.35);ctx.fill();
+    ctx.beginPath();ctx.moveTo(-s*0.1,s*0.05);ctx.lineTo(-s*0.12,s*0.42);ctx.lineTo(-s*0.04,s*0.42);ctx.lineTo(-s*0.02,s*0.05);ctx.fill();
+    ctx.beginPath();ctx.moveTo(s*0.02,s*0.05);ctx.lineTo(s*0.04,s*0.42);ctx.lineTo(s*0.12,s*0.42);ctx.lineTo(s*0.1,s*0.05);ctx.fill();
+    ctx.strokeStyle=show.accentColor;ctx.lineWidth=3;ctx.shadowBlur=12;ctx.shadowColor=show.accentColor;ctx.beginPath();ctx.moveTo(s*0.13,-s*0.2);ctx.lineTo(s*0.5,-s*0.55+Math.sin(t*0.06)*5);ctx.stroke();
     ctx.restore();
   }
-
-  drawDemonSlayer(ctx) {
-    const { w, h, t, show } = this;
-    // Water/fire breathing effect
-    for (let i = 0; i < 5; i++) {
-      const angle = (t * 0.03 + i * 0.4);
-      const r = 40 + i * 12;
-      const x = w * 0.5 + Math.cos(angle) * r;
-      const y = h * 0.4 + Math.sin(angle) * r * 0.4;
-      ctx.save();
-      ctx.globalAlpha = 0.4 - i * 0.07;
-      ctx.fillStyle = i % 2 === 0 ? show.accentColor : show.accentColor2;
-      ctx.shadowBlur = 15;
-      ctx.shadowColor = ctx.fillStyle;
-      ctx.beginPath();
-      ctx.arc(x, y, 4 - i * 0.3, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-    // Slashes
-    this.slashes.forEach(s => {
-      const p = s.t / s.maxT;
-      ctx.save();
-      ctx.globalAlpha = (1 - p) * 0.85;
-      ctx.strokeStyle = show.accentColor;
-      ctx.lineWidth = 3 * (1 - p) + 1;
-      ctx.shadowBlur = 20;
-      ctx.shadowColor = show.accentColor;
-      ctx.beginPath();
-      ctx.moveTo(s.cx - Math.cos(s.angle) * s.len * p, s.cy - Math.sin(s.angle) * s.len * p);
-      ctx.lineTo(s.cx + Math.cos(s.angle) * s.len * p, s.cy + Math.sin(s.angle) * s.len * p);
-      ctx.stroke();
-      ctx.restore();
-    });
-  }
-
-  drawNaruto(ctx) {
-    const { w, h, t, show } = this;
-    // Rasengan / chakra spirals
-    ctx.save();
-    ctx.translate(w * 0.72, h * 0.35);
-    for (let i = 0; i < 3; i++) {
-      const angle = t * 0.08 + (i / 3) * Math.PI * 2;
-      const r = 22 + i * 8;
-      ctx.strokeStyle = i === 0 ? show.accentColor : show.accentColor2;
-      ctx.lineWidth = 2;
-      ctx.globalAlpha = 0.7 - i * 0.15;
-      ctx.shadowBlur = 10; ctx.shadowColor = ctx.strokeStyle;
-      ctx.beginPath();
-      ctx.arc(Math.cos(angle) * 5, Math.sin(angle) * 5, r, 0, Math.PI * 2);
-      ctx.stroke();
-    }
-    ctx.restore();
-    // Lightning bolts
-    this.bolts.forEach(b => {
-      ctx.save();
-      ctx.globalAlpha = (1 - b.t / b.maxT) * 0.9;
-      ctx.strokeStyle = show.accentColor;
-      ctx.lineWidth = 1.5;
-      ctx.shadowBlur = 18; ctx.shadowColor = show.accentColor;
-      const segH = b.h / b.segs;
-      ctx.beginPath();
-      ctx.moveTo(b.x1, b.y1);
-      for (let s = 1; s <= b.segs; s++) {
-        const nx = b.x1 + (b.x2 - b.x1) * (s / b.segs) + (Math.random() - 0.5) * 30;
-        const ny = b.y1 + segH * s;
-        ctx.lineTo(nx, ny);
-      }
-      ctx.stroke();
-      ctx.restore();
-    });
-  }
-
-  drawAOT(ctx) {
-    const { w, h, t, show } = this;
-    // ODM gear cables
-    for (let i = 0; i < 4; i++) {
-      const startX = w * (i * 0.3);
-      const startY = h * 0.1;
-      const endX = w * 0.5 + (i - 1.5) * 40;
-      const endY = h * 0.6;
-      ctx.save();
-      ctx.globalAlpha = 0.3 + Math.sin(t * 0.05 + i) * 0.1;
-      ctx.strokeStyle = show.accentColor;
-      ctx.lineWidth = 1;
-      ctx.setLineDash([4, 4]);
-      ctx.beginPath();
-      ctx.moveTo(startX, startY);
-      ctx.lineTo(endX, endY);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.restore();
-    }
-    // Expanding rings
-    this.rings.forEach(r => {
-      const p = r.t / r.maxT;
-      ctx.save();
-      ctx.globalAlpha = (1 - p) * 0.6;
-      ctx.strokeStyle = show.accentColor;
-      ctx.lineWidth = 2;
-      ctx.shadowBlur = 14; ctx.shadowColor = show.accentColor;
-      ctx.beginPath();
-      ctx.arc(r.x, r.y, r.maxR * p, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.restore();
-    });
-  }
-
-  drawDBZ(ctx) {
-    const { w, h, t, show } = this;
-    // Power aura lines
-    for (let i = 0; i < 12; i++) {
-      const angle = (i / 12) * Math.PI * 2 + t * 0.02;
-      const len = 30 + Math.sin(t * 0.1 + i) * 20;
-      const cx = w * 0.5, cy = h * 0.45;
-      ctx.save();
-      ctx.globalAlpha = 0.5;
-      ctx.strokeStyle = show.accentColor;
-      ctx.lineWidth = 1.5;
-      ctx.shadowBlur = 12; ctx.shadowColor = show.accentColor;
-      ctx.beginPath();
-      ctx.moveTo(cx + Math.cos(angle) * 55, cy + Math.sin(angle) * 55);
-      ctx.lineTo(cx + Math.cos(angle) * (55 + len), cy + Math.sin(angle) * (55 + len));
-      ctx.stroke();
-      ctx.restore();
-    }
-    // Energy bolts
-    this.bolts.forEach(b => {
-      ctx.save();
-      ctx.globalAlpha = (1 - b.t / b.maxT) * 0.8;
-      ctx.strokeStyle = show.accentColor;
-      ctx.lineWidth = 2;
-      ctx.shadowBlur = 20; ctx.shadowColor = show.accentColor;
-      ctx.beginPath();
-      ctx.moveTo(b.x1, b.y1);
-      for (let s = 1; s <= b.segs; s++) {
-        ctx.lineTo(b.x1 + (b.x2 - b.x1) * (s / b.segs) + (Math.random() - 0.5) * 25, b.y1 + (b.y2 - b.y1) * (s / b.segs));
-      }
-      ctx.stroke();
-      ctx.restore();
-    });
-  }
-
-  drawOnePiece(ctx) {
-    const { w, h, t, show } = this;
-    // Ocean waves at bottom
-    for (let wave = 0; wave < 3; wave++) {
-      ctx.save();
-      ctx.globalAlpha = 0.25 - wave * 0.07;
-      ctx.strokeStyle = show.accentColor2;
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      for (let x = 0; x <= w; x += 4) {
-        const y = h * (0.8 + wave * 0.07) + Math.sin(x * 0.03 + t * 0.06 + wave) * 8;
-        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-      ctx.restore();
-    }
-    // Expanding rings
-    this.rings.forEach(r => {
-      const p = r.t / r.maxT;
-      ctx.save();
-      ctx.globalAlpha = (1 - p) * 0.5;
-      ctx.strokeStyle = show.accentColor;
-      ctx.lineWidth = 3;
-      ctx.shadowBlur = 16; ctx.shadowColor = show.accentColor;
-      ctx.beginPath();
-      ctx.arc(r.x, r.y, r.maxR * p, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.restore();
-    });
-  }
-
-  drawJJK(ctx) {
-    const { w, h, t, show } = this;
-    // Cursed energy flowing lines
-    for (let i = 0; i < 8; i++) {
-      const angle = (i / 8) * Math.PI * 2 + t * 0.015 * (i % 2 === 0 ? 1 : -1);
-      const r1 = 45, r2 = 90 + Math.sin(t * 0.08 + i) * 20;
-      const cx = w * 0.5, cy = h * 0.45;
-      ctx.save();
-      ctx.globalAlpha = 0.45;
-      ctx.strokeStyle = i % 2 === 0 ? show.accentColor : show.accentColor2;
-      ctx.lineWidth = 1;
-      ctx.shadowBlur = 10; ctx.shadowColor = ctx.strokeStyle;
-      ctx.beginPath();
-      ctx.moveTo(cx + Math.cos(angle) * r1, cy + Math.sin(angle) * r1);
-      ctx.lineTo(cx + Math.cos(angle) * r2, cy + Math.sin(angle) * r2);
-      ctx.stroke();
-      ctx.restore();
-    }
-    // Slashes
-    this.slashes.forEach(s => {
-      const p = s.t / s.maxT;
-      ctx.save();
-      ctx.globalAlpha = (1 - p) * 0.9;
-      ctx.strokeStyle = show.accentColor2;
-      ctx.lineWidth = 2 * (1 - p) + 1;
-      ctx.shadowBlur = 22; ctx.shadowColor = show.accentColor2;
-      ctx.beginPath();
-      ctx.moveTo(s.cx - Math.cos(s.angle) * s.len * p, s.cy - Math.sin(s.angle) * s.len * p);
-      ctx.lineTo(s.cx + Math.cos(s.angle) * s.len * p, s.cy + Math.sin(s.angle) * s.len * p);
-      ctx.stroke();
-      ctx.restore();
-    });
-  }
+  drawDemonSlayer(ctx) { const {w,h,t,show}=this; for(let i=0;i<5;i++){const angle=t*0.03+i*0.4,r=40+i*12,x=w*0.5+Math.cos(angle)*r,y=h*0.4+Math.sin(angle)*r*0.4;ctx.save();ctx.globalAlpha=0.4-i*0.07;ctx.fillStyle=i%2===0?show.accentColor:show.accentColor2;ctx.shadowBlur=15;ctx.shadowColor=ctx.fillStyle;ctx.beginPath();ctx.arc(x,y,4-i*0.3,0,Math.PI*2);ctx.fill();ctx.restore();} this.slashes.forEach(s=>{const p=s.t/s.maxT;ctx.save();ctx.globalAlpha=(1-p)*0.85;ctx.strokeStyle=show.accentColor;ctx.lineWidth=3*(1-p)+1;ctx.shadowBlur=20;ctx.shadowColor=show.accentColor;ctx.beginPath();ctx.moveTo(s.cx-Math.cos(s.angle)*s.len*p,s.cy-Math.sin(s.angle)*s.len*p);ctx.lineTo(s.cx+Math.cos(s.angle)*s.len*p,s.cy+Math.sin(s.angle)*s.len*p);ctx.stroke();ctx.restore();}); }
+  drawNaruto(ctx) { const {w,h,t,show}=this;ctx.save();ctx.translate(w*0.72,h*0.35);for(let i=0;i<3;i++){const angle=t*0.08+(i/3)*Math.PI*2,r=22+i*8;ctx.strokeStyle=i===0?show.accentColor:show.accentColor2;ctx.lineWidth=2;ctx.globalAlpha=0.7-i*0.15;ctx.shadowBlur=10;ctx.shadowColor=ctx.strokeStyle;ctx.beginPath();ctx.arc(Math.cos(angle)*5,Math.sin(angle)*5,r,0,Math.PI*2);ctx.stroke();}ctx.restore();this.bolts.forEach(b=>{ctx.save();ctx.globalAlpha=(1-b.t/b.maxT)*0.9;ctx.strokeStyle=show.accentColor;ctx.lineWidth=1.5;ctx.shadowBlur=18;ctx.shadowColor=show.accentColor;ctx.beginPath();ctx.moveTo(b.x1,b.y1);for(let s=1;s<=b.segs;s++){ctx.lineTo(b.x1+(b.x2-b.x1)*(s/b.segs)+(Math.random()-0.5)*30,b.y1+(b.h||200)/b.segs*s);}ctx.stroke();ctx.restore();}); }
+  drawAOT(ctx) { const {w,h,t,show}=this;for(let i=0;i<4;i++){const sx=w*(i*0.3),sy=h*0.1,ex=w*0.5+(i-1.5)*40,ey=h*0.6;ctx.save();ctx.globalAlpha=0.3+Math.sin(t*0.05+i)*0.1;ctx.strokeStyle=show.accentColor;ctx.lineWidth=1;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(ex,ey);ctx.stroke();ctx.setLineDash([]);ctx.restore();}this.rings.forEach(r=>{const p=r.t/r.maxT;ctx.save();ctx.globalAlpha=(1-p)*0.6;ctx.strokeStyle=show.accentColor;ctx.lineWidth=2;ctx.shadowBlur=14;ctx.shadowColor=show.accentColor;ctx.beginPath();ctx.arc(r.x,r.y,r.maxR*p,0,Math.PI*2);ctx.stroke();ctx.restore();}); }
+  drawDBZ(ctx) { const {w,h,t,show}=this;for(let i=0;i<12;i++){const angle=(i/12)*Math.PI*2+t*0.02,len=30+Math.sin(t*0.1+i)*20,cx=w*0.5,cy=h*0.45;ctx.save();ctx.globalAlpha=0.5;ctx.strokeStyle=show.accentColor;ctx.lineWidth=1.5;ctx.shadowBlur=12;ctx.shadowColor=show.accentColor;ctx.beginPath();ctx.moveTo(cx+Math.cos(angle)*55,cy+Math.sin(angle)*55);ctx.lineTo(cx+Math.cos(angle)*(55+len),cy+Math.sin(angle)*(55+len));ctx.stroke();ctx.restore();}this.bolts.forEach(b=>{ctx.save();ctx.globalAlpha=(1-b.t/b.maxT)*0.8;ctx.strokeStyle=show.accentColor;ctx.lineWidth=2;ctx.shadowBlur=20;ctx.shadowColor=show.accentColor;ctx.beginPath();ctx.moveTo(b.x1,b.y1);for(let s=1;s<=b.segs;s++){ctx.lineTo(b.x1+(b.x2-b.x1)*(s/b.segs)+(Math.random()-0.5)*25,b.y1+(b.y2-b.y1)*(s/b.segs));}ctx.stroke();ctx.restore();}); }
+  drawOnePiece(ctx) { const {w,h,t,show}=this;for(let wave=0;wave<3;wave++){ctx.save();ctx.globalAlpha=0.25-wave*0.07;ctx.strokeStyle=show.accentColor2;ctx.lineWidth=2;ctx.beginPath();for(let x=0;x<=w;x+=4){const y=h*(0.8+wave*0.07)+Math.sin(x*0.03+t*0.06+wave)*8;x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();ctx.restore();}this.rings.forEach(r=>{const p=r.t/r.maxT;ctx.save();ctx.globalAlpha=(1-p)*0.5;ctx.strokeStyle=show.accentColor;ctx.lineWidth=3;ctx.shadowBlur=16;ctx.shadowColor=show.accentColor;ctx.beginPath();ctx.arc(r.x,r.y,r.maxR*p,0,Math.PI*2);ctx.stroke();ctx.restore();}); }
+  drawJJK(ctx) { const {w,h,t,show}=this;for(let i=0;i<8;i++){const angle=(i/8)*Math.PI*2+t*0.015*(i%2===0?1:-1),r1=45,r2=90+Math.sin(t*0.08+i)*20,cx=w*0.5,cy=h*0.45;ctx.save();ctx.globalAlpha=0.45;ctx.strokeStyle=i%2===0?show.accentColor:show.accentColor2;ctx.lineWidth=1;ctx.shadowBlur=10;ctx.shadowColor=ctx.strokeStyle;ctx.beginPath();ctx.moveTo(cx+Math.cos(angle)*r1,cy+Math.sin(angle)*r1);ctx.lineTo(cx+Math.cos(angle)*r2,cy+Math.sin(angle)*r2);ctx.stroke();ctx.restore();}this.slashes.forEach(s=>{const p=s.t/s.maxT;ctx.save();ctx.globalAlpha=(1-p)*0.9;ctx.strokeStyle=show.accentColor2;ctx.lineWidth=2*(1-p)+1;ctx.shadowBlur=22;ctx.shadowColor=show.accentColor2;ctx.beginPath();ctx.moveTo(s.cx-Math.cos(s.angle)*s.len*p,s.cy-Math.sin(s.angle)*s.len*p);ctx.lineTo(s.cx+Math.cos(s.angle)*s.len*p,s.cy+Math.sin(s.angle)*s.len*p);ctx.stroke();ctx.restore();}); }
 }
 
-// Build dots
 function buildDots() {
   const dotsEl = document.getElementById('anime-dots');
   dotsEl.innerHTML = '';
-  ANIME_SHOWS.forEach((_, i) => {
-    const d = document.createElement('div');
-    d.className = 'anime-dot' + (i === animeIndex ? ' active' : '');
-    dotsEl.appendChild(d);
-  });
+  ANIME_SHOWS.forEach((_,i)=>{const d=document.createElement('div');d.className='anime-dot'+(i===animeIndex?' active':'');dotsEl.appendChild(d);});
 }
 
-let currentScene = null;
-let nextScene = null;
-let transitionAlpha = 1;
-let transitioning = false;
+let currentScene = null, nextScene = null, transitionAlpha = 1, transitioning = false;
 
 function startScene(index) {
   animeIndex = index;
   const show = ANIME_SHOWS[index];
   nextScene = new AnimeScene(show, canvas.width, canvas.height);
-  transitionAlpha = 0;
-  transitioning = true;
+  transitionAlpha = 0; transitioning = true;
   document.getElementById('anime-show-name').textContent = show.name;
   document.getElementById('anime-show-sub').textContent = show.sub;
   document.getElementById('anime-header-name').textContent = show.name;
   buildDots();
 }
 
-function advanceAnime() {
-  const next = (animeIndex + 1) % ANIME_SHOWS.length;
-  startScene(next);
-}
-
 function animateAnime() {
-  if (!canvas.width) { resizeCanvas(); }
-
+  if (!canvas.width) resizeCanvas();
   if (currentScene) currentScene.update();
   if (nextScene) nextScene.update();
-
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   if (transitioning) {
     transitionAlpha = Math.min(1, transitionAlpha + 0.03);
     if (currentScene) currentScene.draw(ctx, 1 - transitionAlpha);
     nextScene.draw(ctx, transitionAlpha);
-    if (transitionAlpha >= 1) {
-      currentScene = nextScene;
-      nextScene = null;
-      transitioning = false;
-    }
+    if (transitionAlpha >= 1) { currentScene = nextScene; nextScene = null; transitioning = false; }
   } else {
     if (currentScene) currentScene.draw(ctx, 1);
   }
-
   requestAnimationFrame(animateAnime);
 }
 
-window.addEventListener('resize', () => {
-  resizeCanvas();
-  if (currentScene) { currentScene.w = canvas.width; currentScene.h = canvas.height; }
-});
-
+window.addEventListener('resize', () => { resizeCanvas(); if(currentScene){currentScene.w=canvas.width;currentScene.h=canvas.height;} });
 resizeCanvas();
 startScene(0);
-// Force first scene as current immediately
-currentScene = nextScene;
-nextScene = null;
-transitioning = false;
-buildDots();
+currentScene = nextScene; nextScene = null; transitioning = false; buildDots();
 animateAnime();
+setInterval(() => startScene((animeIndex + 1) % ANIME_SHOWS.length), 7000);
 
-// Auto-cycle every 7 seconds
-setInterval(advanceAnime, 7000);
-
-// ── BIBLE VERSES ───────────────────────────────────────
+// ── BIBLE VERSES — localStorage + GSheets ─────────────
 const verses = [
   { text: "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.", ref: "Jeremiah 29:11" },
   { text: "I can do all things through Christ who strengthens me.", ref: "Philippians 4:13" },
@@ -2127,134 +1515,343 @@ const verses = [
   { text: "Delight yourself in the Lord, and he will give you the desires of your heart.", ref: "Psalm 37:4" },
 ];
 
-// Pick verse of the day based on date
-const today = new Date();
-let verseIndex = today.getDate() % verses.length;
+let verseIndex = new Date().getDate() % verses.length;
 
 function showVerse() {
   document.getElementById('verse-text').textContent = `"${verses[verseIndex].text}"`;
   document.getElementById('verse-ref').textContent = `— ${verses[verseIndex].ref}`;
 }
 
-function nextVerse() { verseIndex = (verseIndex + 1) % verses.length; showVerse(); }
-function prevVerse() { verseIndex = (verseIndex - 1 + verses.length) % verses.length; showVerse(); }
-showVerse();
+async function saveVerseIndex() {
+  localStorage.setItem('phoenix_verse', verseIndex);
+  await gsFetch({ action: 'saveBible', verseIndex });
+}
 
-// ── TO DO LIST ─────────────────────────────────────────
-let todos = JSON.parse(sessionStorage.getItem('todos') || '[]');
-if (todos.length === 0) {
-  todos = [
-    { text: 'Check morning emails', done: false, tag: 'active' },
-    { text: 'Review project quotes', done: false, tag: 'urgent' },
-    { text: 'Follow up pending items', done: false, tag: 'pending' },
+async function loadVerseIndex() {
+  // localStorage first for instant display
+  const local = localStorage.getItem('phoenix_verse');
+  if (local !== null) { verseIndex = parseInt(local); showVerse(); }
+  // Then GSheets
+  const res = await gsFetch({ action: 'getBible' });
+  if (res.status === 'ok' && res.verseIndex !== undefined) {
+    verseIndex = res.verseIndex;
+    localStorage.setItem('phoenix_verse', verseIndex);
+    showVerse();
+  }
+}
+
+function nextVerse() { verseIndex = (verseIndex + 1) % verses.length; showVerse(); saveVerseIndex(); }
+function prevVerse() { verseIndex = (verseIndex - 1 + verses.length) % verses.length; showVerse(); saveVerseIndex(); }
+loadVerseIndex();
+
+// ── TO DO LIST — localStorage + GSheets ───────────────
+const TODO_KEY = 'phoenix_todos_v2';
+
+function getDefaultTodos() {
+  return [
+    { id: uid(), text: 'Check morning emails', done: false, tag: 'active', updatedAt: new Date().toISOString() },
+    { id: uid(), text: 'Review project quotes', done: false, tag: 'urgent', updatedAt: new Date().toISOString() },
+    { id: uid(), text: 'Follow up pending items', done: false, tag: 'pending', updatedAt: new Date().toISOString() },
   ];
 }
 
-function saveTodos() { try { sessionStorage.setItem('todos', JSON.stringify(todos)); } catch(e){} }
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+
+let todos = [];
+
+async function loadTodosFromSheet() {
+  // Load localStorage immediately for instant display
+  try { todos = JSON.parse(localStorage.getItem(TODO_KEY)) || getDefaultTodos(); } catch(e) { todos = getDefaultTodos(); }
+  renderTodos();
+
+  // Then fetch from GSheets (cross-browser source of truth)
+  setSyncStatus('⟳ Loading from Google Sheets...', 'syncing');
+  const res = await gsFetch({ action: 'getTodos' });
+  if (res.status === 'ok' && Array.isArray(res.todos) && res.todos.length > 0) {
+    todos = res.todos;
+    localStorage.setItem(TODO_KEY, JSON.stringify(todos));
+    renderTodos();
+    setSyncStatus('✓ All data synced to Google Sheets', 'synced');
+    setTimeout(() => setSyncStatus('✓ All data synced to Google Sheets'), 3000);
+  } else {
+    setSyncStatus('💾 Local only — GSheets empty or unreachable');
+  }
+}
+
+async function saveTodos() {
+  // Save localStorage instantly
+  localStorage.setItem(TODO_KEY, JSON.stringify(todos));
+  setSyncStatus('⟳ Syncing to Google Sheets...', 'syncing');
+  const res = await gsFetch({ action: 'saveTodos', todos: JSON.stringify(todos) });
+  if (res.status === 'ok') {
+    setSyncStatus('✓ Todos synced · ' + new Date().toLocaleTimeString(), 'synced');
+    setTimeout(() => setSyncStatus('✓ All data synced to Google Sheets'), 3000);
+  } else {
+    setSyncStatus('⚠ Sync failed — saved locally only', 'error');
+  }
+}
 
 function renderTodos() {
   const list = document.getElementById('todo-list');
   list.innerHTML = '';
   todos.forEach((t, i) => {
     const tagHtml = t.tag ? `<span class="todo-tag tag-${t.tag}">${t.tag}</span>` : '';
-    list.innerHTML += `
-      <div class="todo-item ${t.done ? 'done' : ''}" onclick="toggleTodo(${i})">
-        <div class="todo-check"><span class="todo-check-inner">✓</span></div>
-        <span class="todo-text">${t.text}</span>
-        ${tagHtml}
-        <span style="font-size:12px; color:var(--text-muted); cursor:pointer; margin-left:auto;" onclick="event.stopPropagation(); removeTodo(${i})">✕</span>
-      </div>`;
+    const div = document.createElement('div');
+    div.className = 'todo-item' + (t.done ? ' done' : '');
+    div.innerHTML = `
+      <div class="todo-check"><span class="todo-check-inner">✓</span></div>
+      <span class="todo-text">${escapeHtml(t.text)}</span>
+      ${tagHtml}
+      <span style="font-size:12px; color:var(--text-muted); cursor:pointer; margin-left:auto;" onclick="event.stopPropagation(); removeTodo(${i})">✕</span>`;
+    div.addEventListener('click', () => toggleTodo(i));
+    list.appendChild(div);
   });
   const remaining = todos.filter(t => !t.done).length;
   document.getElementById('todo-count').textContent = `${remaining} remaining`;
 }
 
-function toggleTodo(i) { todos[i].done = !todos[i].done; saveTodos(); renderTodos(); }
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function toggleTodo(i) { todos[i].done = !todos[i].done; todos[i].updatedAt = new Date().toISOString(); saveTodos(); renderTodos(); }
 function removeTodo(i) { todos.splice(i, 1); saveTodos(); renderTodos(); }
 
 function addTodo() {
   const input = document.getElementById('todo-input');
   const text = input.value.trim();
   if (!text) return;
-  todos.push({ text, done: false, tag: 'active' });
+  todos.push({ id: uid(), text, done: false, tag: 'active', updatedAt: new Date().toISOString() });
   input.value = '';
   saveTodos();
   renderTodos();
 }
 
-document.getElementById('todo-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') addTodo();
-});
+function clearDoneTodos() {
+  todos = todos.filter(t => !t.done);
+  saveTodos(); renderTodos();
+}
 
-renderTodos();
+function clearAllTodos() {
+  if (confirm('Clear ALL tasks?')) { todos = []; saveTodos(); renderTodos(); }
+}
 
-// ── TASK CHECKBOXES ────────────────────────────────────
-function toggleTask(el) { el.classList.toggle('done'); }
+document.getElementById('todo-input').addEventListener('keydown', e => { if(e.key==='Enter') addTodo(); });
+loadTodosFromSheet();
 
-// ── D&D CHARACTER SHEET ────────────────────────────────
-// Spell slots state
-const spellSlots = {
-  1: [true, true, false, false],   // true=filled, false=used
-  2: [true, false, false],
-  3: [true, true],
+// ── NEWS via RSS proxy ─────────────────────────────────
+// Using rss2json to convert RSS to JSON (free, no auth needed)
+const RSS2JSON = 'https://api.rss2json.com/v1/api.json?rss_url=';
+
+async function fetchNews(rssUrl, containerId, labelFallback) {
+  const container = document.getElementById(containerId);
+  try {
+    const res = await fetch(RSS2JSON + encodeURIComponent(rssUrl) + '&count=10');
+    const data = await res.json();
+    if (!data.items || data.items.length === 0) throw new Error('No items');
+
+    container.innerHTML = '';
+    data.items.slice(0, 10).forEach(item => {
+      const a = document.createElement('a');
+      a.className = 'news-item';
+      a.href = item.link || '#';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      const source = item.author || data.feed?.title || labelFallback;
+      const pubDate = item.pubDate ? new Date(item.pubDate).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '';
+      a.innerHTML = `
+        <div class="news-dot"></div>
+        <div>
+          <div class="news-text">${item.title}</div>
+          <div class="news-source">${source}${pubDate ? ' · ' + pubDate : ''}</div>
+        </div>`;
+      container.appendChild(a);
+    });
+    return true;
+  } catch(e) {
+    return false;
+  }
+}
+
+async function loadWorldNews() {
+  const container = document.getElementById('world-news-list');
+  container.innerHTML = '<div class="news-loading"><div class="loading-spinner"></div>FETCHING HEADLINES</div>';
+  document.getElementById('world-news-time').textContent = 'Updating...';
+
+  // Try BBC World, fallback to Reuters
+  const feeds = [
+    'https://feeds.bbci.co.uk/news/world/rss.xml',
+    'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
+    'https://feeds.reuters.com/reuters/worldNews',
+  ];
+
+  let success = false;
+  for (const feed of feeds) {
+    success = await fetchNews(feed, 'world-news-list', 'World News');
+    if (success) break;
+  }
+
+  if (!success) {
+    // Final fallback - curated static headlines with links
+    container.innerHTML = `
+      <a class="news-item" href="https://www.bbc.com/news/world" target="_blank"><div class="news-dot"></div><div><div class="news-text">Visit BBC World News for latest headlines</div><div class="news-source">BBC News</div></div></a>
+      <a class="news-item" href="https://apnews.com" target="_blank"><div class="news-dot"></div><div><div class="news-text">AP News — Breaking global coverage</div><div class="news-source">Associated Press</div></div></a>
+      <a class="news-item" href="https://reuters.com" target="_blank"><div class="news-dot"></div><div><div class="news-text">Reuters — International news wire</div><div class="news-source">Reuters</div></div></a>`;
+  }
+
+  const now = new Date();
+  document.getElementById('world-news-time').textContent = `Updated ${now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}`;
+}
+
+async function loadPhNews() {
+  const container = document.getElementById('ph-news-list');
+  container.innerHTML = '<div class="news-loading"><div class="loading-spinner"></div>FETCHING</div>';
+
+  const feeds = [
+    'https://www.philstar.com/rss/headlines',
+    'https://newsinfo.inquirer.net/feed',
+    'https://www.rappler.com/feed/',
+    'https://mb.com.ph/feed/',
+  ];
+
+  let success = false;
+  for (const feed of feeds) {
+    success = await fetchNews(feed, 'ph-news-list', 'PH News');
+    if (success) break;
+  }
+
+  if (!success) {
+    document.getElementById('ph-news-list').innerHTML = `
+      <a class="news-item" href="https://www.rappler.com" target="_blank"><div class="news-dot"></div><div><div class="news-text">Rappler — Philippine news & current affairs</div><div class="news-source">Rappler</div></div></a>
+      <a class="news-item" href="https://www.philstar.com" target="_blank"><div class="news-dot"></div><div><div class="news-text">Philippine Star — Top stories today</div><div class="news-source">PhilStar</div></div></a>
+      <a class="news-item" href="https://newsinfo.inquirer.net" target="_blank"><div class="news-dot"></div><div><div class="news-text">Inquirer — Breaking news Philippines</div><div class="news-source">Inquirer</div></div></a>`;
+  }
+}
+
+// Load news on init
+loadWorldNews();
+loadPhNews();
+// Auto-refresh news every 15 minutes
+setInterval(loadWorldNews, 15 * 60 * 1000);
+setInterval(loadPhNews, 15 * 60 * 1000);
+
+// ── D&D SHEET — localStorage + GSheets ────────────────
+const DND_KEY = 'phoenix_dnd';
+
+const DEFAULT_DND = {
+  spellSlots: { 1:[true,true,false,false], 2:[true,false,false], 3:[true,true] },
+  conditions: { poisoned:false, blessed:true, stunned:false, frightened:false, hasted:true, raging:false },
+  hp: { current: 36, max: 50 },
+  mp: { current: 11, max: 20 },
+  xp: { current: 6800, max: 10000 },
 };
 
+let dndState = DEFAULT_DND;
+
+async function loadDnD() {
+  // localStorage first
+  try {
+    const local = localStorage.getItem(DND_KEY);
+    if (local) { dndState = JSON.parse(local); applyDnDState(); }
+  } catch(e) {}
+
+  // Then GSheets
+  const res = await gsFetch({ action: 'getDnD' });
+  if (res.status === 'ok' && res.data && res.data.spellSlots) {
+    try {
+      dndState = {
+        spellSlots: JSON.parse(res.data.spellSlots),
+        conditions: JSON.parse(res.data.conditions),
+        hp: JSON.parse(res.data.hp),
+        mp: JSON.parse(res.data.mp),
+        xp: JSON.parse(res.data.xp),
+      };
+      localStorage.setItem(DND_KEY, JSON.stringify(dndState));
+      applyDnDState();
+    } catch(e) {}
+  }
+}
+
+async function saveDnD() {
+  localStorage.setItem(DND_KEY, JSON.stringify(dndState));
+  await gsFetch({ action: 'saveDnD', data: JSON.stringify(dndState) });
+}
+
+function applyDnDState() {
+  renderSpellSlots();
+  applyConditions();
+  updateBars();
+}
+
+function updateBars() {
+  const hp = dndState.hp; const mp = dndState.mp; const xp = dndState.xp;
+  document.getElementById('hp-bar').style.width = (hp.current/hp.max*100) + '%';
+  document.getElementById('hp-val').textContent = hp.current + '/' + hp.max;
+  document.getElementById('mp-bar').style.width = (mp.current/mp.max*100) + '%';
+  document.getElementById('mp-val').textContent = mp.current + '/' + mp.max;
+  document.getElementById('xp-bar').style.width = (xp.current/xp.max*100) + '%';
+  document.getElementById('xp-val').textContent = xp.current + '/' + (xp.max >= 1000 ? (xp.max/1000)+'k' : xp.max);
+}
+
 function renderSpellSlots() {
-  [1, 2, 3].forEach(tier => {
+  [1,2,3].forEach(tier => {
     const el = document.getElementById(`slots-${tier}`);
+    if (!el) return;
     el.innerHTML = '';
-    spellSlots[tier].forEach((filled, i) => {
+    const slots = dndState.spellSlots[tier] || [];
+    slots.forEach((filled, i) => {
       const dot = document.createElement('div');
       dot.className = 'dnd-slot ' + (filled ? 'filled' : 'used');
       dot.onclick = () => {
-        spellSlots[tier][i] = !spellSlots[tier][i];
+        dndState.spellSlots[tier][i] = !dndState.spellSlots[tier][i];
         renderSpellSlots();
+        saveDnD();
       };
       el.appendChild(dot);
     });
   });
 }
-renderSpellSlots();
 
-// Dice roller
-function rollDie(sides) {
-  const result = Math.floor(Math.random() * sides) + 1;
-  const el = document.getElementById('dice-result');
-  const typeEl = document.getElementById('dice-type');
-
-  // Animate roll
-  let flashes = 0;
-  const flashInterval = setInterval(() => {
-    el.textContent = Math.floor(Math.random() * sides) + 1;
-    flashes++;
-    if (flashes >= 8) {
-      clearInterval(flashInterval);
-      el.textContent = result;
-      typeEl.textContent = `d${sides}`;
-      el.className = 'dnd-result-value';
-      if (sides === 20 && result === 20) {
-        el.classList.add('crit');
-        typeEl.textContent = 'd20 · NATURAL 20! 🎉';
-      } else if (sides === 20 && result === 1) {
-        el.classList.add('fumble');
-        typeEl.textContent = 'd20 · CRITICAL FAIL 💀';
-      }
+function applyConditions() {
+  document.querySelectorAll('.dnd-condition').forEach(el => {
+    const cond = el.dataset.cond;
+    const active = dndState.conditions[cond];
+    if (active) {
+      el.className = 'dnd-condition active-cond';
+      if (cond === 'blessed') el.classList.add('blessed');
+      else if (cond === 'hasted') el.classList.add('hasted');
+      else if (cond === 'raging') el.classList.add('raging');
+    } else {
+      el.className = 'dnd-condition inactive';
     }
-  }, 60);
+  });
 }
 
-// Condition toggle
 function toggleCondition(el) {
   const cond = el.dataset.cond;
-  if (el.classList.contains('inactive')) {
-    el.classList.remove('inactive');
-    el.classList.add('active-cond');
-    if (cond === 'blessed') el.classList.add('blessed');
-    else if (cond === 'hasted') el.classList.add('hasted');
-    else if (cond === 'raging') el.classList.add('raging');
-  } else {
-    el.className = 'dnd-condition inactive';
-  }
+  dndState.conditions[cond] = !dndState.conditions[cond];
+  applyConditions();
+  saveDnD();
+}
+
+loadDnD();
+
+function rollDie(sides) {
+  const result = Math.floor(Math.random()*sides)+1;
+  const el = document.getElementById('dice-result');
+  const typeEl = document.getElementById('dice-type');
+  let flashes = 0;
+  const flashInterval = setInterval(()=>{
+    el.textContent = Math.floor(Math.random()*sides)+1;
+    flashes++;
+    if(flashes>=8){
+      clearInterval(flashInterval);
+      el.textContent=result; typeEl.textContent=`d${sides}`;
+      el.className='dnd-result-value';
+      if(sides===20&&result===20){el.classList.add('crit');typeEl.textContent='d20 · NATURAL 20! 🎉';}
+      else if(sides===20&&result===1){el.classList.add('fumble');typeEl.textContent='d20 · CRITICAL FAIL 💀';}
+    }
+  }, 60);
 }
 </script>
 </body>
